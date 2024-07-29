@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, BrowseServices, FAQAPI } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const CreditCardsClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/CreditCardsClient'), {
   ssr: false
@@ -100,6 +101,8 @@ export default async function Page({ searchParams }) {
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
+
       <CreditCardsClient
         productlistdata={productlistdata}
         categorytopmenulist={categorytopmenulist}
@@ -112,6 +115,7 @@ export default async function Page({ searchParams }) {
         url_slug={'credit-cards'}
         serviceTabs={serviceTabs}
       />
+      </Suspense>
     </>
   )
 }

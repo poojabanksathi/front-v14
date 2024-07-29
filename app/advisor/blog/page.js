@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import CommonBreadCrumbComponent from "@/app/client/component/common/CommonList/CommonBreadCrumbComponent";
 import {
   BASE_URL,
@@ -7,6 +8,7 @@ import {
 } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const CreditNews = dynamic(
   () => import("@/app/client/component/Layout/CreditNews/CreditNews"),
@@ -159,6 +161,8 @@ export default async function Page() {
 
   return (
     <>
+                <Suspense fallback={<LoaderComponent />}>
+
       {CreditNewsList && (
         <div className="bg-[#F4F8FB] h-auto">
           <CommonBreadCrumbComponent
@@ -175,6 +179,7 @@ export default async function Page() {
           />
         </div>
       )}
+      </Suspense>
     </>
   );
 }

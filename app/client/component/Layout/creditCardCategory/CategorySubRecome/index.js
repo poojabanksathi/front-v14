@@ -1,8 +1,9 @@
 'use client';
-import React, { useRef, useState } from 'react'
+import React, { Suspense, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { useIsInViewport } from '@/hooks/useIsInViewport'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const FAQ = dynamic(() => import('@/app/client/component/common/FAQ/FAQ'), {
   ssr: false
@@ -50,6 +51,7 @@ function CategorySubRecome({
 
   return (
     <div className='bg-[#F4F8FB]'>
+      <Suspense fallback={<LoaderComponent/>}>
        {productlistdataSub ? (
         <div className='container min-h-[500px] max-[1024px]:px-8 mx-auto max-[991px]:max-w-full pt-[50px] pb-[100px] max-[479px]:px-4 max-[479px]:py-[30px] max-[375px]:px-4 max-[320px]:px-4'>
 
@@ -63,6 +65,7 @@ function CategorySubRecome({
             credit_url_slug={credit_url_slug}
             sub_cat_url={sub_cat_url}
           />
+
         </div>
       ) :
         <p className='font-semibold text-[24px] max-[576px]:text-[24px] max-[425px]:text-[24px] max-[320px]:text-[22px] text-center pt-3 text-[#212529]'>
@@ -80,6 +83,7 @@ function CategorySubRecome({
           </div>
         )}
         <FAQ faqdata={faqdata} />
+        </Suspense>
       {/* </div> */}
     </div>
   )

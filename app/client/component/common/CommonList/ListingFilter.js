@@ -23,7 +23,7 @@ import ReactStars from 'react-stars'
 import dynamic from 'next/dynamic'
 import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import InputRange from 'react-input-range'
 import { BASE_URL, BUSINESSCATEGORY, USERSET } from '@/utils/alljsonfile/service'
 import toast, { Toaster } from 'react-hot-toast'
@@ -98,7 +98,6 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
   const userData = typeof window !== 'undefined' && localStorage?.getItem('userData')
   const scrollValue = typeof window !== 'undefined' && window?.scrollY
   const pathName = usePathname()
-  const searchParams = useSearchParams()
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -674,7 +673,7 @@ function ListingFilter({ productlistdata, categorytopmenulist, moreleftmenucredi
   }, [checkboxValues])
 
   const route = pathName
-  const position = searchParams?.page ? (searchParams?.page - 1) * 10 : 0
+  const position = router?.query?.page ? (router?.query?.page - 1) * 10 : 0
 
   const listingItems = productlistdata?.product_list?.map((product, index) => {
     const pagePosition = position + index + 1

@@ -8,6 +8,7 @@ const nextConfig = {
         dynamic: 30,
         static: 180,
       },
+      missingSuspenseWithCSRBailout: false,
       optimizePackageImports: ['react-star-ratings', 'react-d3-speedometer' , 'slick-carousel'],
 
     },

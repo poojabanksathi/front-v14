@@ -1,6 +1,6 @@
 "use client";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import React, { useRef, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import HeaderSection from "./HeaderSection/HeaderSection";
 import Image from "next/image";
 import StarRatings from "react-star-ratings";
@@ -19,6 +19,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import LoanMobileCompareTable from "./LoanMobileCompareTable/LoanMobileCompareTable";
 import Link from "next/link";
 import CreditCardTrobleHaving from "../../compareCard/cardTrobleHaving/CreditCardTrobleHaving";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const PersonalLoanCompare = ({
   slug1Data,
@@ -479,11 +480,14 @@ const PersonalLoanCompare = ({
           </div>
         )}
       </div>
+      <Suspense fallback={<LoaderComponent/>}>
+
       {!isPdfPage && (
         <div className="py-4">
           <CreditCardTrobleHaving position={"2"} />
         </div>
       )}
+      </Suspense>
     </div>
   );
 };

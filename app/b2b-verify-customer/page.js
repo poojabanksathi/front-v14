@@ -1,6 +1,8 @@
 import { B2B, BASE_URL, BUSINESSCATEGORY } from "@/utils/alljsonfile/service";
 import axios from "axios";
 import B2bVerifyCustomerClient from "../client/component/Pages/B2bVerifyCustomerClient/B2bVerifyCustomerClient";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 export async function generateMetadata() {
   return {
@@ -47,5 +49,11 @@ export default async function Page({ searchParams }) {
   const customerId = searchParams.h?.replace(" ", "+") || "";
   const pageData = await getPageData(customerId);
 
-  return <B2bVerifyCustomerClient {...pageData} />;
+  return (
+    <Suspense fallback={<LoaderComponent />}>
+
+  <B2bVerifyCustomerClient {...pageData} />
+  </Suspense>
+)
+  ;
 }

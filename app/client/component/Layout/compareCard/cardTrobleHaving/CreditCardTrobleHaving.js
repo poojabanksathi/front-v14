@@ -6,14 +6,13 @@ import rightArrow from '../../../../../../public/assets/rightArrow.svg'
 import markQuetion from '../../../../../../public/assets/mark-quetion-icon.svg'
 
 import Link from 'next/link'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { getPromotionObject, sendEventToGTM } from '@/utils/util'
 import { useIsInViewport } from '@/hooks/useIsInViewport'
 
 function CreditCardTrobleHaving({ creditCompare, position }) {
   const router = useRouter()
   const pathName = usePathname()
-  const searchParams = useSearchParams()
   const params = useParams();
 
   const hasSlug = params.slug;

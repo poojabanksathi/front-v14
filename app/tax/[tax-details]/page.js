@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const DynamicHeader = dynamic(() => import('@/app/client/component/common/Header'), {
   ssr: false
@@ -78,6 +79,8 @@ export default async function Page({ params }) {
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
+
       {/* <div className=' bg-[#844FCF]'>
         <DynamicHeader businessCategorydata={businessCategorydata} />
       </div> */}
@@ -94,6 +97,7 @@ export default async function Page({ params }) {
       
       </div>
       <ScrollToTop smooth color='#000' /> */}
+      </Suspense>
     </>
   )
 }

@@ -10,6 +10,8 @@ import Axios from "axios";
 import dynamic from "next/dynamic";
 import { MainContext } from "../client/component/Leads/MainContext";
 import LeadsClient from "../client/component/Pages/LeadsClient/LeadsClient";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const MobileFooter = dynamic(
   () => import("@/app/client/component/common/MobileFooter"),
@@ -54,6 +56,8 @@ export default async function Leads({ searchParams }) {
 
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <div>
         <div className="bg-[#F4F8FB] ">
           <LeadsClient
@@ -71,6 +75,7 @@ export default async function Leads({ searchParams }) {
           <FAQ faqdata={faqData} />
         </div>
       </div>
+      </Suspense>
     </>
   );
 }

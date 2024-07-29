@@ -1,6 +1,8 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, BLOG, BUSINESSCATEGORY } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const CommonBreadCrumbComponent = dynamic(
   () =>
@@ -82,6 +84,8 @@ export default async function NewsDetails({ params }) {
 
   return (
     <>
+                <Suspense fallback={<LoaderComponent />}>
+
       <div>
         <div className="bg-[#F4F8FB] h-auto">
           <CommonBreadCrumbComponent
@@ -101,6 +105,7 @@ export default async function NewsDetails({ params }) {
           />
         </div>
       </div>
+      </Suspense>
     </>
   );
 }

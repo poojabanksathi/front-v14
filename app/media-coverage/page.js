@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, mediaCoverageApi } from '@/utils/alljsonfile/service'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 // import { useRouter } from 'next/navigation'
 
@@ -54,32 +55,14 @@ async function getMeadiaData() {
 
 export default async function Page() {
   const mediaData = await getMeadiaData()
-  // const router = useRouter()
 
-  // useEffect(() => {
-  //   if (mediaData?.mediaCoverageData?.data?.length === 0) {
-  //     router.push('/404')
-  //   }
-  // }, [mediaData?.mediaCoverageData?.data?.length, router])
 
   return (
     <>
-    <MediaCoverageClient mediaCoverage={mediaData?.mediaCoverageData}/>
-      {/* <div className=' bg-[#844FCF]'>
-        <BredcrumbCalculator />
-        <MediaCoverageBanner />
-      </div>
+                  <Suspense fallback={<LoaderComponent />}>
 
-      {mediaData?.mediaCoverageData?.data?.length !== 0 && (
-        <>
-          <div className='bg-[#F4F8FB] '>
-            <MediaCoverageSlider mediaCoverage={mediaData?.mediaCoverageData} />
-          </div>
-          <div className='bg-[#F4F8FB] '>
-            <MediaCoverageNews mediaCoverage={mediaData?.mediaCoverageData} />
-          </div>
-        </>
-      )} */}
+    <MediaCoverageClient mediaCoverage={mediaData?.mediaCoverageData}/>
+</Suspense>
 
   
     </>

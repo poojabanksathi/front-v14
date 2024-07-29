@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, multipleSlug } from '@/utils/alljsonfile/service'
 import { getDeviceIdCookie } from '@/utils/util'
 import { headers } from 'next/headers';
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent';
 
 const CardLandingClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/CardLandingClient'), {
   ssr: false
@@ -87,6 +88,8 @@ export default async function Page({params }) {
  
  
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <CardLandingClient 
     categoryUrl={categoryUrl}
     productDetailsUrl={productDetailsUrl}
@@ -94,5 +97,6 @@ export default async function Page({params }) {
     businessmetaheadtag={businessmetaheadtag}
     
     />
+    </Suspense>
   )
 }

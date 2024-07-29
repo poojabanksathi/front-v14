@@ -1,7 +1,7 @@
 "use client";
 import KeyBgcredit from "../../../../../public/assets/key-factor-credit.svg";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -11,12 +11,12 @@ const style = {
 
 function VedioCheck({ productDetailsData, hideTitle, title }) {
   const [videoStart, setVideoStart] = useState(false);
+  const router = useRouter()
   const params = useParams();
-  const searchParams = useSearchParams();
   const cardsDetails =
-    params["cards-details"] || searchParams.get("cards-details");
+    params["cards-details"] || router?.query["cards-details"];
   const categoryName =
-    params["category-name"] || searchParams.get("category-name");
+    params["category-name"] || router?.query["category-name"];
 
   return (
     <>

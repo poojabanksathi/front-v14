@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import CreditCardTrobleHaving from '../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'
 import FAQ from '@/app/client/component/common/FAQ/FAQ'
 import Link from 'next/link'
@@ -20,6 +20,7 @@ import { Margin, usePDF } from 'react-to-pdf'
 import Cookies from 'js-cookie'
 import ApplyNowButton from '@/app/client/component/common/ApplyNowButton/ApplyNowButton'
 import { useReactToPrint } from 'react-to-print'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const CompareCardTable = dynamic(() => import('@/app/client/component/Layout/savingAccountList/CompareTable'), {
   ssr: false
@@ -566,8 +567,11 @@ const CompareSavingsCard = ({ faqdata, slug1, slug2, slug3, productcomparedata }
             </Link>
           </div>
         </div>
+        <Suspense fallback={<LoaderComponent/>}>
+
         <CreditCardTrobleHaving position={'2'} />
         <FAQ faqdata={faqdata} />
+        </Suspense>
       </div>
     </div>
   )

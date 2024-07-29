@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const SetUpProfile = dynamic(() => import('@/app/client/component/Layout/setUpProfile'), {
@@ -50,10 +51,12 @@ export default async function Page() {
 
   return (
     <>
-      <div className='h-auto bg-[#F4F8FB]'>
-        <SetUpProfile />
-      </div>
 
+      <div className='h-auto bg-[#F4F8FB]'>
+    {/* <Suspense fallback={<LoaderComponent />}> */}
+        <SetUpProfile />
+{/* </Suspense> */}
+      </div>
     </>
   )
 }

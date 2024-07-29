@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const CommonBreadCrumbComponent = dynamic(() => import('@/app/client/component/common/CommonList/CommonBreadCrumbComponent'), {
   ssr: false
@@ -64,6 +65,7 @@ export default async function Page() {
   const { businessCategorydata, CreditNewsList , businessmetaheadtag } = await getData();
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
 
       {CreditNewsList && (
         <div className='bg-[#F4F8FB] h-auto'>
@@ -76,7 +78,7 @@ export default async function Page() {
           <CreditNews CreditNewsList={CreditNewsList} pageTitle='IFSC Code Blogs' ifscPage={true} />
         </div>
       )}
-    
+    </Suspense>
     </>
   )
 }

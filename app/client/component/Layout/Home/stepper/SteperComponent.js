@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
 import mainRound from '../../../../../../public/assets/main-round.svg'
 import rightArrow from '../../../../../../public/assets/rightArrow.svg'
 import dynamic from 'next/dynamic'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent'
 
 const CreditCardTrobleHaving = dynamic(() => import('../../compareCard/cardTrobleHaving/CreditCardTrobleHaving'), {
   ssr: false
@@ -67,8 +68,10 @@ function SteperComponent({ RecomendedTopselling }) {
         <TopRecommendationSell RecomendedTopselling={RecomendedTopselling} />
 
         {/* =========== trouble choosing  ============ */}
+        <Suspense fallback={<LoaderComponent/>}>
 
         <CreditCardTrobleHaving position={'3'}/>
+        </Suspense>
       </div>
     </div>
   )

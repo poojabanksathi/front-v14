@@ -1,11 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import dynamic from 'next/dynamic'
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 export default function Page() {
 
   const PrivacyHeaderText = dynamic(() => import('@/app/client/component/Layout/PrivacyPolicy/PrivacyHeaderText/index'), {
     ssr: false
   })
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <div className="bg-[#F4F8FB] text-[#212529]">
       <div className=' container h-full py-4  mx-auto max-[991px]:max-w-full max-[834px]:py-[35px] max-[576px]:py-[52px] max-[479px]:py-[20px] max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4'>
         <PrivacyHeaderText title="Terms & Conditions" />
@@ -352,5 +355,6 @@ export default function Page() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

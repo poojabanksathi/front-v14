@@ -1,7 +1,8 @@
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent';
 import { BASE_URL, BUSINESSCATEGORY, BrowseServices, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import dynamic from 'next/dynamic'
 import { headers } from 'next/headers';
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const CreditRecommendationClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/CreditRecommendationClient'), {
   ssr: false
@@ -106,6 +107,8 @@ async function getData( params ) {
     const { faqData, businessmetaheadtag, businessCategoryData , serviceTabs, topMenuCategories , creditCardsList} = data;
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
    <CreditRecommendationClient
    faqData={faqData}
    businessmetaheadtag={businessmetaheadtag}
@@ -114,6 +117,7 @@ async function getData( params ) {
    topMenuCategories={topMenuCategories}
    creditCardsList={creditCardsList}
    />
+   </Suspense>
   )
 }
 

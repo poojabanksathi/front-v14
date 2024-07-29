@@ -7,6 +7,8 @@ import {
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const HomePageV2 = dynamic(
   () => import("@/app/client/component/Layout/HomepageV2"),
@@ -79,7 +81,10 @@ export default async function Index(context) {
 
   return (
     <>
+                <Suspense fallback={<LoaderComponent />}>
+
       <HomePageV2 faqdata={data?.faqdata} />
+      </Suspense>
     </>
   );
 }

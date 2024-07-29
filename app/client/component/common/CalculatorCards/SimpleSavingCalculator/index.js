@@ -1,10 +1,11 @@
 'use client';
-import React from "react";
+import React, { Suspense } from "react";
 import EmiSliderComp from "./EmiSliderComp";
 import dynamic from "next/dynamic";
 import CheckCibilCard from "../../CheckCibilCard/CheckCibilCard";
 import { scoreData } from "@/utils/alljsonfile/checkCibilCardList";
 import { eligibilityData } from "@/utils/alljsonfile/checkCibilCardList";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const CreditNewsOffer = dynamic(
   () =>
@@ -48,6 +49,8 @@ function LoanCalculatorEmiDetails({ title, metaData }) {
           </div>
         </div>
         <div className="grid grid-cols-12 ">
+        <Suspense fallback={<LoaderComponent/>}>
+
           <div className="col-span-8 max-lg:col-span-12 h-full">
             <div className="max-sm:px-4 max-[320px]:px-0">
               {metaData && (
@@ -78,6 +81,7 @@ function LoanCalculatorEmiDetails({ title, metaData }) {
               />
             </div>
           </div>
+          </Suspense>
         </div>
       </div>
     </div>

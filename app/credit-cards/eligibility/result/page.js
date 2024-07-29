@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers';
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent';
 
 const EligibilityResultClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/EligibilityResultClient'), {
   ssr: false
@@ -90,6 +91,8 @@ export default async function Page({params}) {
     leadsParams} = data;
   
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
    <EligibilityResultClient
    businessCategorydata={businessCategorydata}
    eligibleSlug={eligibleSlug}
@@ -97,5 +100,6 @@ export default async function Page({params}) {
    leadsParams={leadsParams}
 
    />
+   </Suspense>
   )
 }

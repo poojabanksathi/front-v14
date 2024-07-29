@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BLOG,
@@ -11,6 +12,7 @@ import { capitalizeFirstLetter, getDeviceIdCookie } from "@/utils/util";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 const CommonBreadCrumbComponent = dynamic(
   () =>
@@ -176,6 +178,8 @@ export default async function PersonalLoanDetailsPage({
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
+
       <div className="bg-[#F4F8FB]">
         {isInfoPage ? (
           <div className="bg-[#F4F8FB]">
@@ -238,6 +242,7 @@ export default async function PersonalLoanDetailsPage({
         )}
       </div>
       <div></div>
+      </Suspense>
     </>
   );
 }

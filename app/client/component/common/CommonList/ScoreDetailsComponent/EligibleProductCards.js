@@ -3,7 +3,7 @@
 import { AvailableProduct, EligibilityCardBox, ProductEligibleCardBox } from '@/utils/alljsonfile/cardseligibility'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import React, { Suspense, useRef, useState } from 'react'
 
 import { useEffect } from 'react'
 import chevronDown from '../../../../../../public/assets/chevronDown.svg'
@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import { handleRemoveLocalstorage } from '@/utils/util'
 import PaymentHistoryMonths from '../../PaymentHistoryMonths'
 import dynamic from 'next/dynamic'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const EligibleProductsListing = dynamic(() => import('./EligibleProductsListing'), { ssr: false })
 
@@ -181,7 +182,9 @@ function EligibleProductCards({
   }
   return (
     <>
+    
       <Toaster />
+      <Suspense fallback={<LoaderComponent/>}>
 
       {SelectProductTabs === 0 && (
         <>
@@ -463,6 +466,7 @@ function EligibleProductCards({
           )}
         </>
       )}
+      </Suspense>
     </>
   )
 }

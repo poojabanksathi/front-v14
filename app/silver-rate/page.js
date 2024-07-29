@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const CommonBreadCrumbComponent = dynamic(() => import('@/app/client/component/common/CommonList/CommonBreadCrumbComponent'), {
   ssr: false
@@ -66,6 +67,8 @@ export default async function Page() {
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
+
       {CreditNewsList && (
         <div className='bg-[#F4F8FB] h-auto'>
           <CommonBreadCrumbComponent
@@ -77,7 +80,7 @@ export default async function Page() {
           <CreditNews CreditNewsList={CreditNewsList} pageTitle='Silver Rate Blogs' silverRatePage={true} />
         </div>
       )}
-     
+     </Suspense>
     </>
   )
 }

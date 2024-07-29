@@ -1,12 +1,13 @@
 
 
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const DynamicHeader = dynamic(() => import('@/app/client/component/common/Header'), {
   ssr: false
@@ -96,10 +97,13 @@ const { data } = fetchData()
 
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <div className='h-full bg-[#F4F8FB] login-mobile-res '>
    
         <Loginpage lastPageVisited={data?.lastPageVisited} />
       </div>
+      </Suspense>
     </>
   )
 }

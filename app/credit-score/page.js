@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from "@/utils/alljsonfile/service";
 import  Axios  from "axios";
 import { headers } from "next/headers";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const ScoreCreditCards = dynamic(
   () => import("@/app/client/component/Layout/scoreCreditCard"),
@@ -77,6 +78,8 @@ export default async function CreditScorePage() {
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
+
       <section>
         <div className="bg-[#F4F8FB]">
           <div className="ml-4">
@@ -94,6 +97,7 @@ export default async function CreditScorePage() {
           </Suspense>
         </div>
       </section>
+      </Suspense>
     </>
   );
 }

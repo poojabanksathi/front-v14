@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI, PRODUCTSAPI } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const HomePageV2Client = dynamic(() => import('@/app/client/component/Pages/HomePageV2Client/HomePageV2Client'), {
   ssr: false
@@ -112,12 +113,15 @@ export default async function Page() {
   const { businessCategorydata , faqdata , RecomendedTopselling , longTermData , registerdevicedata} = await getData();
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
      <HomePageV2Client 
      businessCategorydata={businessCategorydata} 
      faqdata={faqdata} 
      RecomendedTopselling={RecomendedTopselling} 
      longTermData={longTermData} 
      registerdevicedata={registerdevicedata}/>
+     </Suspense>
     </>
   )
 }

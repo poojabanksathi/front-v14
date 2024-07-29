@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import CloseIcon from '../../../../../../public/assets/closeIcon.svg'
 import alertOctagon from '../../../../../../public/assets/alert-octagon.svg'
 import dynamic from 'next/dynamic'
@@ -38,7 +38,6 @@ const EligibleProductsListing = ({
   const router = useRouter()
   const pathName = usePathname()
 
-  const searchParams = useSearchParams()
 
   const isMobile = size?.width <= 576
   const isTablet = size?.width === 768
@@ -107,7 +106,7 @@ const EligibleProductsListing = ({
     }
   }, [selectedData?.length])
 
-  const position = searchParams?.page ? (searchParams?.page - 1) * 10 : 0
+  const position = router?.query?.page ? (router?.query?.page - 1) * 10 : 0
   const combine = filteredDataCard && filteredBankAccountsData && [...filteredDataCard, ...filteredBankAccountsData]
 
   const listingItems = combine?.map((product, index) => {

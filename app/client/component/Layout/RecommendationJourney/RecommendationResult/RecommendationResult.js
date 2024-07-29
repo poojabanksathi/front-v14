@@ -2,7 +2,7 @@
 'use client';
 import { useWindowSize } from '@/hooks/useWindowSize'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import BackArrow from '../../../../../../public/assets/left-arrow.svg'
 import HeadSection from './HeadSection/HeadSection'
 import { CardNetwork, FilaterData, ProviderFilter } from '@/utils/alljsonfile/filterdata'
@@ -15,6 +15,7 @@ import FilterIcon from '../../../../../../public/assets/filter-icon.svg'
 import MobileFilter from './MobileFilter/MobileFilter'
 import CloseIcon from '../../../../../../public/assets/close-icon.svg'
 import TagManager from 'react-gtm-module'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const RecommendationResult = ({ filteredList, formInfo, leftMenuFilterData }) => {
   const starCount = 5
@@ -677,6 +678,8 @@ const handleWebEngageEvent = (eventName, eventData) => {
             {size?.width >= 992 && (
               <div className='2xl:col-span-1 xl:col-span-1 md:col-span-1 bg-none relative'>{getFilterComponent()}</div>
             )}
+                    <Suspense fallback={<LoaderComponent/>}>
+
             {cardsList && (
               <CardsListing
                 checkBoxValues={checkBoxValues}
@@ -694,6 +697,7 @@ const handleWebEngageEvent = (eventName, eventData) => {
                 filteredList={filteredList}
               />
             )}
+            </Suspense>
           </div>
         </div>
       </div>

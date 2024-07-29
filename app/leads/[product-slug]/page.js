@@ -1,8 +1,10 @@
 import LeadsClient from "@/app/client/component/Pages/LeadsClient/LeadsClient";
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, multipleSlug } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 const LeadsArea = dynamic(() => import("@/app/client/component/Leads"), {
   ssr: false,
@@ -18,6 +20,8 @@ export default async function Leads({ params, searchParams }) {
 
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <div className="bg-[#F4F8FB] h-full">
         <LeadsClient
           productData={productData}
@@ -26,6 +30,7 @@ export default async function Leads({ params, searchParams }) {
           h={h}
         />
       </div>
+      </Suspense>
     </>
   );
 }

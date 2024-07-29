@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const PartnersClient = dynamic(() => import('@/app/client/component/Pages/PartnersClient/PartnersClient'), {
   ssr: false
@@ -8,7 +9,10 @@ const PartnersClient = dynamic(() => import('@/app/client/component/Pages/Partne
 const Page = () => {
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <PartnersClient />
+      </Suspense>
     </>
   )
 }

@@ -8,6 +8,8 @@ import Axios from "axios";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import CommonBreadCrumbComponent from "@/app/client/component/common/CommonList/CommonBreadCrumbComponent";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const PersonalLoan = dynamic(
   () => import("@/app/client/component/Layout/PersonalLoan/PersonalLoan"),
@@ -138,6 +140,8 @@ export default async function Page({ searchParams }) {
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
+
       <div className="bg-[#F4F8FB]">
         <CommonBreadCrumbComponent
           link1={"/personal-loan"}
@@ -157,6 +161,7 @@ export default async function Page({ searchParams }) {
       <div className="bg-[#F4F8FB]">
         <FAQ faqdata={faqData} />
       </div>
+      </Suspense>
     </>
   );
 }

@@ -1,8 +1,10 @@
 import CommonBreadCrumbComponent from "@/app/client/component/common/CommonList/CommonBreadCrumbComponent";
 import LoanRecommendationResult from "@/app/client/component/Layout/PersonalLoan/PersonalLoanRecommendation/LoanRecommendationResult/LoanRecommendationResult";
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, BUSINESSCATEGORY } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 async function getData() {
   const headersList = headers();
@@ -63,6 +65,8 @@ export default async function Page() {
   const { leftMenuFilterData } = data;
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <div className="bg-[#F4F8FB]">
       <div className="container max-[1200px]:px-0 max-[1024px]:px-0 mx-auto max-[991px]:max-w-full">
         <CommonBreadCrumbComponent
@@ -76,5 +80,6 @@ export default async function Page() {
       </div>
       <LoanRecommendationResult leftMenuFilterData={leftMenuFilterData} />
     </div>
+    </Suspense>
   );
 }

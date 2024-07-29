@@ -9,6 +9,8 @@ import Image from "next/image";
 import CarLoan from "../../../../../../public/assets/car-loan-cal.svg";
 import CheckCibilCard from "../../CheckCibilCard/CheckCibilCard";
 import EmiSliderChart from "../LoanCalculatorEmiDetails/EmiSliderChart";
+import { Suspense } from "react";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const CreditNewsOffer = dynamic(
   () =>
@@ -54,6 +56,8 @@ function CarLoanCalculatorDetails({ metaData }) {
           </div>
         </div>
         <div className="grid grid-cols-12 mt-[35px] ">
+        <Suspense fallback={<LoaderComponent/>}>
+
           <div className="col-span-8 max-lg:col-span-12  h-full">
             <div className="max-sm:px-4 max-[320px]:px-0">
               {metaData && (
@@ -84,6 +88,7 @@ function CarLoanCalculatorDetails({ metaData }) {
               />
             </div>
           </div>
+          </Suspense>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import ReactStars from "react-stars";
 import logo from "../../../../../../public/assets/footer-Logo.svg";
 import { useWindowSize } from "@/hooks/useWindowSize";
@@ -23,6 +23,7 @@ import {
 import Cookies from "js-cookie";
 import useGaEvents from "@/hooks/useGaEvents";
 import ApplyNowButton from "@/app/client/component/common/ApplyNowButton/ApplyNowButton";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const ExperReview = dynamic(
   () => import("@/app/client/component/Layout/savingAccountList/ExperReview"),
@@ -719,6 +720,8 @@ const SavingAccountsDetails = ({
           </div>
         </div>
       </div>
+      <Suspense fallback={<LoaderComponent/>}>
+
       <div className="container mx-auto xl:px-8">
         {/* <EligiblityCriteria isTab={isTab} /> */}
         <div ref={videoRef}>
@@ -750,6 +753,7 @@ const SavingAccountsDetails = ({
                 </button>
               </div> */}
             </div>
+
             <div id="related-accounts">
               <AccountListRight
                 isTab={isTab}
@@ -780,6 +784,7 @@ const SavingAccountsDetails = ({
         </div>
         {/* faq to be added */}
       </div>
+      </Suspense>
     </>
   );
 };

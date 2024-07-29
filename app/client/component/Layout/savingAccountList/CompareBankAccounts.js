@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import closeicon from '../../../../../public/assets/closeIcon.svg'
@@ -17,6 +17,7 @@ import SocialMediaShareComp from '@/app/client/component/common/CommonList/Socia
 import { useReactToPrint } from 'react-to-print'
 import CreditCardTrobleHaving from '../compareCard/cardTrobleHaving/CreditCardTrobleHaving'
 import SearchableDropdown from '../../common/SearchableDropdown/SearchableDropdown'
+import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent';
 
 const CompareBankAccounts = ({ slug1, slug2, slug3, productcomparedata, title }) => {
   // TO GET SELECT OPTIONS VALUES ----
@@ -1488,7 +1489,10 @@ const CompareBankAccounts = ({ slug1, slug2, slug3, productcomparedata, title })
         </div>
       </div>
       <div className='py-4'>
+      <Suspense fallback={<LoaderComponent/>}>
+
         <CreditCardTrobleHaving position={'2'} />
+        </Suspense>
       </div>
     </div>
   )

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const CreditNews = dynamic(() => import('@/app/client/component/Layout/CreditNews/CreditNews'), {
   ssr: false
@@ -66,8 +67,6 @@ export default async function Page({params}) {
 
   return (
     <>
-    
-
       {CreditNewsList && (
         <div className='bg-[#F4F8FB] h-auto'>
           <CommonBreadCrumbComponent
@@ -79,7 +78,6 @@ export default async function Page({params}) {
           <CreditNews CreditNewsList={CreditNewsList} pageTitle='Gold Rate Blogs' goldRatePage={true} />
         </div>
       )}
-    
     </>
   )
 }

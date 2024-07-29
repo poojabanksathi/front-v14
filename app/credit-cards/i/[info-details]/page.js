@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const InfoDetailsClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/InfoDetailsClient'), {
   ssr: false
@@ -88,13 +89,16 @@ async function getData( params ) {
   
     const { businessCategorydata, newsDetailsData , blogUrl , newsListData } = data;
   
-  return (
+  return (    
+          <Suspense fallback={<LoaderComponent />}>
+
    <InfoDetailsClient
    businessCategorydata={businessCategorydata}
    newsDetailsData={newsDetailsData}
    blogUrl={params?.['info-details']}
    newsListData={newsListData}
    />
+   </Suspense>
   )
 }
 

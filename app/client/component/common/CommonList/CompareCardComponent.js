@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent';
 
 const CompareCardBoxed = dynamic(() => import('../../Layout/compareCard/cardBox/CompareCardBoxed'), {
   ssr: false
@@ -32,6 +33,8 @@ function CompareCardComponent({ faqdata, slug1, slug2, slug3, productcomparedata
 
   return (
     <div className='bg-[#F4F8FB]'>
+                <Suspense fallback={<LoaderComponent/>}>
+
       <div
         className={`container  min-h-[500px] max-[1440px]:px-12 max-[1200px]:px-0 mx-auto max-[991px]:max-w-full pt-20 pb-[100px] px-20 rounded-2xl max-[1024px]:px-8 max-[479px]:px-0 max-[1024px]:pt-16 max-[479px]:pb-0 max-[375px]:pb-7 max-[479px]:pt-7 ${scrollY > 0 ? 'scroll-banner' : 'scroll-same'
           }`}>
@@ -39,6 +42,7 @@ function CompareCardComponent({ faqdata, slug1, slug2, slug3, productcomparedata
       </div>
       <CreditCardTrobleHaving  position={'2'}/>
       <FAQ faqdata={faqdata} />
+      </Suspense>
     </div>
   )
 }

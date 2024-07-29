@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const MyApllication = dynamic(() => import('@/app/client/component/Layout/scoreCreditCard/myApplications'), {
@@ -77,11 +78,12 @@ export default async function Page() {
   
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
 
       <div className='bg-[#F4F8FB] h-auto'>
         <MyApllication faqdata={data?.faqdata} productList={data?.productList}/>
       </div>
-     
+     </Suspense>
     </>
   )
 }

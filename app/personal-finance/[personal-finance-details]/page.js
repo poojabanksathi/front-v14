@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const PersonalFinanceDetailsClient = dynamic(() => import('@/app/client/component/Pages/PersonalFinanceDetailsClient/PersonalFinanceDetailsClient'), {
   ssr: false
@@ -61,6 +62,7 @@ export default async function Page({ params }) {
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
       <PersonalFinanceDetailsClient 
       businessCategorydata={businessCategorydata} 
       businessmetaheadtag={businessmetaheadtag}
@@ -68,7 +70,7 @@ export default async function Page({ params }) {
       newsDetailsData={newsDetailsData} 
       blogUrl={params?.['personal-finance-details']}
         />
-
+</Suspense>
     </>
   )
 }

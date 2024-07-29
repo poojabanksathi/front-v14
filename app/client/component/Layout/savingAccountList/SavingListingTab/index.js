@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import CreditCardsRoundButton from "@/app/client/component/common/CreditCardsRoundButton";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 // import { SavingCardListAll, SavingListCards } from '@/utils/alljsonfile/savinglistcards'
 import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { useWindowSize } from "@/hooks/useWindowSize";
@@ -1141,6 +1141,7 @@ const SavingListingTab = ({
                 </div>
               </div>
             )}
+        <Suspense fallback={<LoaderComponent/>}>
 
             <AccountListRight
               checkBoxValues={
@@ -1160,6 +1161,7 @@ const SavingListingTab = ({
               isApplied={isApplied}
               getSortingOptionsPlp={getSortingOptionsPlp}
             />
+            </Suspense>
           </div>
         </div>
 

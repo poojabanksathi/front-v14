@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BLOG,
@@ -10,6 +11,7 @@ import { capitalizeFirstLetter } from "@/utils/util";
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 const PersonalLoanApplication = dynamic(
   () =>
@@ -148,6 +150,8 @@ export default async function PersonalLoanCategory({ params, searchParams }) {
 
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
+
       <div className="bg-[#F4F8FB]">
         {isInfoPage ? (
           <>
@@ -197,6 +201,7 @@ export default async function PersonalLoanCategory({ params, searchParams }) {
       <div className="bg-[#F4F8FB]">
         <FAQ faqdata={data.faqData} />
       </div>
+      </Suspense>
     </>
   );
 }

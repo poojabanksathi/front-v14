@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 import ScrollToTop from "react-scroll-to-top";
 import { metaInfo } from "@/utils/metaInfo";
 import Head from "next/head";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const DynamicFooter = dynamic(
   () => import("@/app/client/component/common/Footer"),
@@ -38,6 +39,8 @@ export default function page({ businessCategorydata }) {
     window.location.origin + window.location.pathname;
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <div>
         <head>
           <title>{metaInfo?.pageTitle}</title>
@@ -90,6 +93,7 @@ export default function page({ businessCategorydata }) {
       <div className="scroll-top">
         <ScrollToTop smooth color="#000" />
       </div>
+      </Suspense>
     </>
   );
 }

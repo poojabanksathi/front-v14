@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import CommonBreadCrumbComponent from "@/app/client/component/common/CommonList/CommonBreadCrumbComponent";
 import {
   BASE_URL,
@@ -9,6 +10,7 @@ import {
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 const FAQ = dynamic(() => import("@/app/client/component/common/FAQ/FAQ"), {
   ssr: true,
@@ -139,6 +141,8 @@ export default async function Page() {
   } = data;
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <div>
       <div className="bg-[#F4F8FB]">
         <CommonBreadCrumbComponent
@@ -164,5 +168,6 @@ export default async function Page() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

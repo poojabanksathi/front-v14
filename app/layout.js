@@ -8,8 +8,8 @@ import TagManager from "react-gtm-module";
 import Cookies from "js-cookie";
 import { is_webengage_event_enabled, setHash } from "@/utils/util";
 import { v4 as uuidv4 } from "uuid";
-import React, { Component, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { Component, Suspense, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import ErrorBoundary from "@/core/ErrorBoundary/ErrorBoundary";
 import DynamicFooter from "@/app/client/component/common/Footer";
 import DynamicHeader from "@/app/client/component/common/Header";
@@ -18,6 +18,7 @@ import ScrollToTop from "react-scroll-to-top";
 import MobileFooter from "@/app/client/component/common/MobileFooter";
 import ClientApplication from "@/core/ClientApplication/ClientApplication";
 import { BASE_URL, BUSINESSCATEGORY } from "@/utils/alljsonfile/service";
+import LoaderComponent from "./client/component/Partners/LoaderComponent/LoaderComponent";
 
 
 function getData(callback) {
@@ -63,6 +64,7 @@ export default  function RootLayout({ children, pageProps }) {
   const [businessCategorydata, setBusinessCategorydata] = useState(null);
   const [businessmetaheadtag, setBusinessmetaheadtag] = useState(null);
   const [isPageHead , setIsPageHead] = useState(false)
+  const { query } = useRouter();
 
   useEffect(() => {
     getData((err, data) => {
@@ -77,7 +79,6 @@ export default  function RootLayout({ children, pageProps }) {
   }, []);
   const [value, setValue] = useState();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const isLandingPage = pathname?.includes("landing");
   const isComaprePage = pathname?.includes("compare");
   const isHomev2 = pathname?.includes("home-pagev2");
@@ -100,11 +101,11 @@ export default  function RootLayout({ children, pageProps }) {
 
   useEffect(() => {
     TagManager?.initialize({ gtmId: "GTM-W9D3PRCF" });
-    const h = searchParams.get("h");
+    const h = query?.h;
     if (!h) {
       sessionStorage.removeItem("h");
     }
-  }, [searchParams]);
+  }, [query?.h]);
 
   useEffect(() => {
     if (pageProps?.referer) {
@@ -123,23 +124,23 @@ export default  function RootLayout({ children, pageProps }) {
 
   useEffect(() => {
     getDeviceId();
-    if (searchParams.get("utm_source")) {
+    if (query?.utm_source) {
       if (typeof window !== "undefined") {
         const pathname = window?.location?.href;
         localStorage.setItem("url", pathname);
       }
     }
-  }, [searchParams]);
+  }, [query?.utm_source]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const h = searchParams.get("h");
+      const h = query?.h;
       if (h) {
         setHash(h);
         localStorage.setItem("h", h);
       }
     }
-  }, [searchParams]);
+  }, [query?.h]);
 
   useEffect(() => {
     const handleGTM = () => {
@@ -219,6 +220,8 @@ export default  function RootLayout({ children, pageProps }) {
       {/* <HeaderComp /> */}
       <ErrorBoundary>
         <body>
+        {/* <Suspense fallback={<LoaderComponent />}> */}
+
           {!isLandingPage && (
             <HeaderComp metaData={businessmetaheadtag} />
           )}
@@ -249,6 +252,7 @@ export default  function RootLayout({ children, pageProps }) {
               )}
             </body>
           </ClientApplication>
+          {/* </Suspense> */}
         </body>
       </ErrorBoundary>
     </html>

@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BLOG,
@@ -9,6 +10,7 @@ import {
 import { capitalizeFirstLetter } from "@/utils/util";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const CreditNews = dynamic(
   () => import("@/app/client/component/Layout/CreditNews/CreditNews"),
@@ -153,6 +155,8 @@ export default async function BankAccountsSubCategory(context) {
 
   return (
     <>
+                <Suspense fallback={<LoaderComponent />}>
+
       {isInfoPage ? (
         <div className="bg-[#F4F8FB]">
           <CommonBreadCrumbComponent
@@ -202,6 +206,7 @@ export default async function BankAccountsSubCategory(context) {
           </div>
         </>
       )}
+      </Suspense>
     </>
   );
 }

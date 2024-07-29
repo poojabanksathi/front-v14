@@ -1,6 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
+import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent';
 
 const CreditCardTrobleHaving = dynamic(
   () => import('@/app/client/component/Layout/compareCard/cardTrobleHaving/CreditCardTrobleHaving'),
@@ -55,6 +56,8 @@ function SavingAccountList({
     : `${Img_URL}/${businessmetaheadtag?.product_image}`
   return (
     <div className='bg-[#F4F8FB]'>
+            <Suspense fallback={<LoaderComponent/>}>
+
       {/* <SavingAccountBanner businessmetaheadtag={businessmetaheadtag} /> */}
       <CreditListingBanner businessmetaheadtag={businessmetaheadtag} src={imageUrl} linesToShow={2} />
       <div className='container px-20 max-[1440px]:px-12 max-[1200px]:px-0 min-[1024px]:px-14 mx-auto max-[991px]:max-w-full min-[768px]:px-8'>
@@ -76,6 +79,7 @@ function SavingAccountList({
         <ServiceTabs serviceTabs={serviceTabs} position={'5'} />
       </div>
       {/* <EmojiCard/> */}
+      </Suspense>
     </div>
   )
 }

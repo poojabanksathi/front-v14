@@ -9,7 +9,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 // import SuccessIcon from '@/app/client/component/Leads/common/SuccessIcon'
 import dynamic from "next/dynamic";
 import logo from "../../../../../../public/assets/footer-Logo.svg";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { sendEventToGTM } from "@/utils/util";
 import alertOctagon from "../../../../../../public/assets/alert-octagon.svg";
 import { mockData } from "../data";
@@ -56,7 +56,6 @@ function AccountListRight({
 
   const size = useWindowSize();
   const router = useRouter();
-  const searchParams = useSearchParams()
   const pathNameurl = usePathname()
   const cardDataRef = useRef(null);
 
@@ -681,7 +680,7 @@ function AccountListRight({
   };
 
   const route = pathNameurl;
-  const position = searchParams?.page ? (searchParams?.page - 1) * 10 : 0;
+  const position = router?.query?.page ? (router?.query?.page - 1) * 10 : 0;
 
   const listingItems = SavingCardListAll?.map((product, index) => {
     const pagePosition =

@@ -1,7 +1,9 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, COMMON, FAQAPI } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 const PersonalLoanEligibility = dynamic(
   () =>
@@ -67,6 +69,8 @@ export default async function Page() {
   const { businessmetaheadtag, faqdata } = data;
 
   return (
+    <Suspense fallback={<LoaderComponent/>}>
+
     <div className="bg-[#F4F8FB]">
       <CommonRoundedBreadcrumb
         link1="/personal-loan"
@@ -81,5 +85,6 @@ export default async function Page() {
       <CreditBeginnerCard longTerm={businessmetaheadtag} />
       <FAQ faqdata={faqdata} />
     </div>
+    </Suspense>
   );
 }

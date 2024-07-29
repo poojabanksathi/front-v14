@@ -1,6 +1,8 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, COMMON, FAQAPI } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const FAQ = dynamic(() => import("@/app/client/component/common/FAQ/FAQ"), {
   ssr: false,
@@ -69,6 +71,8 @@ export default async function Page() {
   const { businessmetaheadtag } = await getData();
   return (
     <>
+              <Suspense fallback={<LoaderComponent/>}>
+
       <div className="bg-[#F4F8FB] h-auto">
         <BredcrumbCalculator />
         <div className="h-auto">
@@ -81,6 +85,7 @@ export default async function Page() {
         <CalculatorBeginnerCard longTerm={businessmetaheadtag} />
         <FAQ faqdata={faqdata} /> */}
       </div>
+      </Suspense>
     </>
   );
 }

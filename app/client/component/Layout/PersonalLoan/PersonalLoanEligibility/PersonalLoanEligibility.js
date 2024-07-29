@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import LoanEligibilityForm from './LoanEligibilityForm/LoanEligibilityForm'
 import VedioCheck from '@/app/client/component/common/VedioCheck'
 import Image from 'next/image'
@@ -7,6 +7,7 @@ import starImage from '../../../../../../public/assets/Star-18.svg'
 import { eligibilityFeatures } from '@/utils/alljsonfile/personal-loan'
 import { useParams, useRouter } from 'next/navigation'
 import ParagraphBanner from '../../CategoryParagraphBanner'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const PersonalLoanEligibility = ({ metaResponseData, longTerm }) => {
   const router = useRouter()
@@ -41,6 +42,8 @@ const PersonalLoanEligibility = ({ metaResponseData, longTerm }) => {
   }, [params?.eligible])
 
   return (
+    <Suspense fallback={<LoaderComponent/>}>
+
     <div className='container h-full mx-auto px-14 max-[1440px]:px-14 max-[1200px]:px-0 max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 max-[991px]:max-w-full mt-[px]'>
       <div className=' grid grid-cols-2 gap-[30px] max-[771px]:grid-cols-1 max-[576px]:gap-[28px] mb-[20px]'>
         <div className='flex flex-col'>
@@ -79,6 +82,7 @@ const PersonalLoanEligibility = ({ metaResponseData, longTerm }) => {
         />
       </div>
     </div>
+    </Suspense>
   )
 }
 

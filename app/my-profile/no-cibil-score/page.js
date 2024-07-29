@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const NoCibilScore = dynamic(() => import('@/app/client/component/Layout/scoreCreditCard/NoCibilScore'), {
@@ -85,6 +86,8 @@ const data = await getData()
 
   return (
     <>
+    
+        <Suspense fallback={<LoaderComponent/>}>
 
       <div className='bg-[#F4F8FB] h-auto'>
         <NoCibilScore noCibilProductsData={data?.noCibilProductsData} />
@@ -92,7 +95,7 @@ const data = await getData()
       <div className='bg-[#F4F8FB] '>
         <FAQ faqdata={data?.faqdata} />
       </div>
-     
+     </Suspense>
     </>
   )
 }

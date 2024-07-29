@@ -20,7 +20,7 @@ import {
 import dynamic from 'next/dynamic'
 import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import ReactStars from 'react-stars'
 import InputRange from 'react-input-range'
 import toast, { Toaster } from 'react-hot-toast'
@@ -115,7 +115,6 @@ function ListingFilterSubData({
   const size = useWindowSize()
   const router = useRouter()
   const pathName = usePathname()
-  const searchParams = useSearchParams()
 
   const pageSize = 20
   const isSubCatBankPage = pathName?.includes('-bank')
@@ -1012,7 +1011,7 @@ function ListingFilterSubData({
   }, [checkboxValues])
 
   const listCondition = filtedAfterData?.length ? filtedAfterData : productlistdataSub?.product_list
-  const position = searchParams?.page ? (searchParams?.page - 1) * 10 : 0
+  const position = router?.query?.page ? (router?.query?.page - 1) * 10 : 0
 
   const listingItems = productlistdataSub?.product_list?.map((product, index) => {
     const pagePosition = position == 0 ? position + index + 1 : position + index + 1

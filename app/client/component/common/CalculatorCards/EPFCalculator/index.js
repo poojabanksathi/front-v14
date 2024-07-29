@@ -1,13 +1,14 @@
 'use client';
 import Image from "next/image";
 import EPFCal from "../../../../../../public/assets/epf-cal-icon.svg";
-import React from "react";
+import React, { Suspense } from "react";
 import EPFSliderChart from "./EPFSliderChart";
 import ParagraphBanner from "@/app/client/component/Layout/CategoryParagraphBanner";
 import CheckCibilCard from "../../CheckCibilCard/CheckCibilCard";
 import { scoreData } from "@/utils/alljsonfile/checkCibilCardList";
 import { eligibilityData } from "@/utils/alljsonfile/checkCibilCardList";
 import dynamic from "next/dynamic";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const CreditNewsOffer = dynamic(
   () =>
@@ -53,6 +54,8 @@ function EPFCalculator({ metaData }) {
           </div>
         </div>
         <div className="grid grid-cols-12 mt-[35px] ">
+        <Suspense fallback={<LoaderComponent/>}>
+
           <div className="col-span-8 max-lg:col-span-12  h-full">
             <div className="max-sm:px-4 max-[320px]:px-0">
               {metaData && (
@@ -83,6 +86,7 @@ function EPFCalculator({ metaData }) {
               />
             </div>
           </div>
+          </Suspense>
         </div>
       </div>
     </div>

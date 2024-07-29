@@ -1,13 +1,14 @@
 'use client';
 import Image from "next/image";
 import PersonalRupee from "../../../../../../public/assets/personal-loan-cal.svg";
-import React from "react";
+import React, { Suspense } from "react";
 import EmiSliderChart from "../LoanCalculatorEmiDetails/EmiSliderChart";
 import ParagraphBanner from "@/app/client/component/Layout/CategoryParagraphBanner";
 import { scoreData } from "@/utils/alljsonfile/checkCibilCardList";
 import { eligibilityData } from "@/utils/alljsonfile/checkCibilCardList";
 import dynamic from "next/dynamic";
 import CheckCibilCard from "../../CheckCibilCard/CheckCibilCard";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const CreditNewsOffer = dynamic(
   () =>
@@ -54,6 +55,8 @@ function PersonalCalculatorDetails({ metaData }) {
           </div>
         </div>
         <div className="grid grid-cols-12 mt-[35px]">
+        <Suspense fallback={<LoaderComponent/>}>
+
           <div className="col-span-8 max-lg:col-span-12 h-full">
             <div className="max-sm:px-4 max-[320px]:px-0">
               {metaData && (
@@ -84,6 +87,7 @@ function PersonalCalculatorDetails({ metaData }) {
               />
             </div>
           </div>
+          </Suspense>
         </div>
       </div>
     </div>

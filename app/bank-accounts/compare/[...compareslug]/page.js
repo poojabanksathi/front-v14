@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BUSINESSCATEGORY,
@@ -7,6 +8,7 @@ import {
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 const CommonBreadCrumbComponent = dynamic(
   () =>
@@ -100,6 +102,7 @@ export default async function CompareIndex({ params, searchParams }) {
 
   if (isPdfPage) {
     return (
+      <Suspense fallback={<LoaderComponent />}>
       <CompareBankPdfPage
         faqdata={faqdata}
         slug1={slug1}
@@ -109,6 +112,7 @@ export default async function CompareIndex({ params, searchParams }) {
         link={`/bank-accounts`}
         title={"Compare Savings Accounts"}
       />
+    </Suspense>
     );
   }
 

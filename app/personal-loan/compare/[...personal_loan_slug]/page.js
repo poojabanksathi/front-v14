@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BUSINESSCATEGORY,
@@ -7,6 +8,7 @@ import {
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 
 const CommonBreadCrumbComponent = dynamic(
   () =>
@@ -89,6 +91,8 @@ export default async function PersonalLoanComparePage({ params }) {
 
   if (isPdfPage) {
     return (
+      <Suspense fallback={<LoaderComponent />}>
+
       <LoanComparePdf
         slug1={data.slug1Data}
         slug2={data.slug2Data}
@@ -97,10 +101,13 @@ export default async function PersonalLoanComparePage({ params }) {
         link={`/credit-cards`}
         title="Compare Personal Loans"
       />
+      </Suspense>
     );
   }
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <div>
            <div className=' bg-[#844FCF]'>
               <DynamicHeader
@@ -129,5 +136,6 @@ export default async function PersonalLoanComparePage({ params }) {
         />
       </div>
     </div>
+    </Suspense>
   );
 }

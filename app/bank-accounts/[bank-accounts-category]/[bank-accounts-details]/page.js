@@ -1,5 +1,6 @@
 // app/bank-accounts/[bank-accounts-category]/[bank-accounts-details]/page.js
 
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BLOG,
@@ -13,6 +14,7 @@ import { capitalizeFirstLetter, getDeviceIdCookie } from "@/utils/util";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 const CreditNewsDetails = dynamic(
   () =>
@@ -209,7 +211,9 @@ export default async function SavingsAccountsDetails(context) {
   };
 
   return (
+                  <Suspense fallback={<LoaderComponent />}>
     <div>
+
       {data.productDetailsData?.product_details && (
         <script
           type="application/ld+json"
@@ -270,5 +274,6 @@ export default async function SavingsAccountsDetails(context) {
         <FAQ faqdata={data.faqData} />
       </div>
     </div>
+      </Suspense>
   );
 }

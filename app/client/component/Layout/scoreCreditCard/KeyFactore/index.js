@@ -1,11 +1,12 @@
 'use client';
 import { KeyScorefactore } from '@/utils/alljsonfile/keyfactorescore'
-import React from 'react'
+import React, { Suspense } from 'react'
 import ScorePlayer from '../../../../../../public/assets/score-player.svg'
 import KeyBgcredit from '../../../../../../public/assets/key-factor-credit.svg'
 import Image from 'next/image'
 import ReactPlayer from 'react-player'
 import VedioCheck from '@/app/client/component/common/VedioCheck'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const style = {
   backgroundImage: `url(${KeyBgcredit.src})`
@@ -40,7 +41,10 @@ function KeyFactore() {
           )
         })}
       </div>
+      <Suspense fallback={<LoaderComponent/>}>
+
       <VedioCheck productDetailsData={{video_url:'https://youtu.be/XHIR6JdhNZc'}} hideTitle={true}/>
+      </Suspense>
     </div>
   )
 }

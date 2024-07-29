@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const MyOfferClient = dynamic(() => import('@/app/client/component/Pages/MyProfileClient/MyOfferClient'), {
   ssr: false
@@ -106,10 +107,12 @@ const  Page = async () => {
 
   return (
     <>  
+                  <Suspense fallback={<LoaderComponent />}>
+
       <div className='bg-[#F4F8FB] h-auto'>
         <MyOfferClient faqdata={data?.faqdata} productList={data?.productList} bankAccountListing={data?.bankAccountListing} />
       </div>
-     
+     </Suspense>
     </>
   )
 }

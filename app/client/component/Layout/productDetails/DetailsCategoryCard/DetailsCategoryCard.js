@@ -1,7 +1,8 @@
 'use client';
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { capitalizeFirstLetter } from '@/utils/util'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const FAQ = dynamic(() => import('@/app/client/component/common/FAQ/FAQ'), {
   ssr: false
@@ -28,6 +29,8 @@ function DetailsCategoryCard({
 }) {
 
   return (
+    <Suspense fallback={<LoaderComponent/>}>
+
     <div className='bg-[#F4F8FB]'>
       <CommonBreadCrumbComponent
         link1={'/credit-cards'}
@@ -58,6 +61,7 @@ function DetailsCategoryCard({
       )}
       <FAQ faqdata={faqdata} />
     </div>
+    </Suspense>
   )
 }
 

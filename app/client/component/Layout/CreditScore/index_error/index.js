@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import CreditScoreBanner from '../CreditScoreBanner/CreditScoreBanner'
 // import KnowledgeBase from '../../common/CommonList/KnowledgeBase'
 import FAQ from '../../../common/FAQ/FAQ'
@@ -22,6 +22,8 @@ const VedioCheck = dynamic(() => import('@/app/client/component/common/VedioChec
 const CreditScore = ({ faqdata, longTerm, metaData }) => {
   return (
     <>
+            <Suspense fallback={<LoaderComponent/>}>
+
       <div className='bg-[#F4F8FB] w-full h-auto'>
         <CommonRoundedBreadcrumb link1={'/credit-score'} link1Name={'Credit Score'} highlight1={true} />
         <CreditScoreBanner metaData={metaData} />
@@ -36,6 +38,7 @@ const CreditScore = ({ faqdata, longTerm, metaData }) => {
         <FAQ faqdata={faqdata} />
       </div>
       {/* <TrobleChoose position={'6'} /> */}
+      </Suspense>
     </>
   )
 }

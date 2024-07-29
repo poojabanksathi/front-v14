@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 
@@ -66,10 +67,12 @@ export default async function Page() {
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
 
         <div className=' bg-[#844FCF]'>
           <EnquiryForm businessmetaheadtag={businessmetaheadtag}/>
         </div>
+        </Suspense>
     </>
   )
 }

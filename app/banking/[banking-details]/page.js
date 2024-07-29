@@ -1,6 +1,8 @@
 import BankingDetailsClient from "@/app/client/component/Pages/BankingClient/BankingDetailsClient";
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, BLOG } from "@/utils/alljsonfile/service";
 import Axios from "axios";
+import { Suspense } from "react";
 
 export async function getPageData(slug) {
 
@@ -40,12 +42,15 @@ const BankingPage = async ({params}) => {
   const { newsDetailsData, newsListData } = await getPageData(params);
   return (
     <>
+          <Suspense fallback={<LoaderComponent />}>
+
       <BankingDetailsClient
         newsDetailsData={newsDetailsData}
         newsListData={newsListData}
         blogUrl={params?.["banking-details"]}
 
       />
+      </Suspense>
     </>
   );
 };

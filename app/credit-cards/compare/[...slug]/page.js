@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Axios from "axios";
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, FAQAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent';
 
 const FAQ = dynamic(() => import('@/app/client/component/common/FAQ/FAQ'), {
   ssr: false
@@ -134,6 +135,8 @@ async function getData(params ,searchParams, reqHeaders) {
   return (
    
         <>
+                  <Suspense fallback={<LoaderComponent/>}>
+
             <div className=' bg-[#844FCF]'>
               <DynamicHeader
                 slug1={data?.slug1}
@@ -155,7 +158,9 @@ async function getData(params ,searchParams, reqHeaders) {
               />
             )}
           </div>
+
           <div className='bg-[#F4F8FB] '>
+            
             <CreditCardTrobleHaving creditCompare={true} position={'3'} />
 
             <FAQ faqdata={data?.faqdata} />
@@ -163,8 +168,9 @@ async function getData(params ,searchParams, reqHeaders) {
           </div>
           {/* <DynamicFooter businessCategorydata={businessCategorydata} />
           <div className='scroll-top'>
-            <ScrollToTop smooth color='#000' />
+          <ScrollToTop smooth color='#000' />
           </div> */}
+          </Suspense>
         </>
       
   )

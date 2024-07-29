@@ -1,11 +1,12 @@
 "use client";
 import { setHash } from "@/utils/util";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function ClientApplication({ children }) {
-  const queries = useSearchParams();
-  const hQuery = queries?.get("h");
+  const { query } = useRouter();
+
+  const hQuery = query?.h;
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (hQuery) {
@@ -13,7 +14,7 @@ export default function ClientApplication({ children }) {
         localStorage.setItem("h", hQuery);
       }
     }
-  }, [queries]);
+  }, [query]);
 
   return children;
 }

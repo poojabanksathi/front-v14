@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import accordionArrowall from '../../../../../public/assets/accordion-down.svg'
 import starRate from '../../../../../public/assets/star-rate.svg'
 import likeIcon from '../../../../../public/assets/like-icon.svg'
@@ -46,6 +46,7 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 import moment from 'moment'
 import StarRatings from 'react-star-ratings'
 import TagManager from 'react-gtm-module'
+import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent';
 
 const CreditListingBanner = dynamic(() => import('@/app/client/component/Layout/creditCardList/CreditListingBanner'), {
   ssr: false
@@ -1664,6 +1665,8 @@ function CardDetailsFilterBox({
           </div>
         )}
       </div>
+      <Suspense fallback={<LoaderComponent/>}>
+
       <div ref={eligibilityRef}>
         <EligibilityCriteriaDetail productDetailsData={productDetailsData} position={'3'} />
       </div>
@@ -1677,6 +1680,7 @@ function CardDetailsFilterBox({
       <div ref={moreAboutRef} className='xl:px-12'>
         <HowToApplyDetail productLongformcon={productLongformcon} moreAboutRef={moreAboutRef} />
       </div>
+      </Suspense>
     </>
   )
 }

@@ -1,3 +1,4 @@
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import {
   BASE_URL,
   BUSINESSCATEGORY,
@@ -5,6 +6,7 @@ import {
 } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const LoanEligibilityResult = dynamic(
   () =>
@@ -90,12 +92,14 @@ const LoanEligibilityResultPage = async () => {
     await getData();
   return (
     <>
+    <Suspense fallback={<LoaderComponent />}>
       <div className="h-full bg-[#F4F8FB]">
         <LoanEligibilityResult
           productList={productList}
           leadsParams={leadsParams}
         />
       </div>
+      </Suspense>
     </>
   );
 };

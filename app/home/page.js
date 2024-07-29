@@ -1,9 +1,10 @@
 // ------------------------------------------- OLDER VERSION OF HOMEPAGE -------------------------------------------- //
 
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const HomePageV2 = dynamic(() => import('@/app/client/component/Layout/HomepageV2'), {
@@ -130,8 +131,10 @@ const { productlistdata ,categorytopmenulist , businessmetaheadtag , faqdata , l
 
   return (
     <>
+                  <Suspense fallback={<LoaderComponent />}>
+
       <HomePageV2 faqdata={faqdata} />
-    
+    </Suspense>
     </>
   )
 }

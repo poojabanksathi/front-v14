@@ -7,6 +7,8 @@ import {
 import Axios from "axios";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const SavingAccountList = dynamic(
   () => import("@/app/client/component/Layout/savingAccountList")
@@ -125,6 +127,8 @@ export default async function SavingsAccount({ searchParams }) {
 
   return (
     <>
+          <Suspense fallback={<LoaderComponent />}>
+
       <div className="bg-[#F4F8FB]">
         <CommonBreadCrumbComponent
           link1={"/bank-accounts"}
@@ -147,6 +151,7 @@ export default async function SavingsAccount({ searchParams }) {
       <div className="bg-[#F4F8FB]">
         <FAQ faqdata={faqData} />
       </div>
+      </Suspense>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BUSINESSCATEGORY, COMMON} from '@/utils/alljsonfile/service'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 
@@ -95,6 +96,8 @@ export default async function Page() {
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent/>}>
+
       <section>
         <div className=' bg-[#844FCF]'>
           <AboutBanner />
@@ -108,7 +111,7 @@ export default async function Page() {
         <AwardsAbout />
         <VedioCheck productDetailsData={dataAboute?.businessmetaheadtag}/>
       </div>
-
+</Suspense>
     </>
   )
 }

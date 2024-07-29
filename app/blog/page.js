@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BLOG, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import ScrollToTop from 'react-scroll-to-top'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 const KnowledgeBaseDetail = dynamic(() => import('@/app/client/component/Layout/knowledgeBaseDetail'), {
   ssr: false
@@ -151,12 +152,13 @@ export default async function Page() {
 
   return (
     <>
+      <Suspense fallback={<LoaderComponent />}>
 
       <div className='bg-[#F4F8FB]'>
         <KnowledgebaseBreadcrumb />
         <KnowledgeBaseDetail faqdata={data?.faqdata} getAllBlog={data?.getAllBlog} />
       </div>
-    
+    </Suspense>
   
     </>
   )

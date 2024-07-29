@@ -1,6 +1,8 @@
 import AadharCardClient from "@/app/client/component/Pages/AadharCardClient/AadharCardClient";
 import { BASE_URL, BLOG, COMMON } from "@/utils/alljsonfile/service";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 const AadharDetails = dynamic(
   () => import("@/app/client/component/Layout/AadharDetails"),
@@ -80,6 +82,8 @@ const AadharCardPage = async () => {
 
   return (
     <>
+            <Suspense fallback={<LoaderComponent />}>
+
       <AadharCardClient>
         <div>
           <div className="bg-[#F4F8FB] h-auto">
@@ -90,6 +94,7 @@ const AadharCardPage = async () => {
           </div>
         </div>
       </AadharCardClient>
+      </Suspense>
     </>
   );
 };

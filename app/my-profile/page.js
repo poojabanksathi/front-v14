@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const ScoreDetails = dynamic(() => import('@/app/client/component/Layout/scoreCreditCard/ScoreDetails/ScoreDetails'), {
@@ -80,11 +81,12 @@ const {businessCategorydata, faqdata, productList} = await getData()
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
 
       <div className='bg-[#F4F8FB] h-auto'>
         <ScoreDetails faqdata={faqdata} productList={productList} />
       </div>
-     
+     </Suspense>
     </>
   )
 }

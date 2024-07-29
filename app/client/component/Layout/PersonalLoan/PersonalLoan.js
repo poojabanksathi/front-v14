@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { Suspense } from 'react'
 import CreditListingBanner from '../creditCardList/CreditListingBanner'
 import PersonalLoanListing from './PersonalLoanListing/PersonalLoanListing'
 import VedioCheck from '../../common/VedioCheck'
@@ -7,6 +7,7 @@ import ServiceTabs from '../savingAccountList/ServiceTabs'
 import LongFormContent from './LongFormContent/LongFormContent'
 import { ImageBaseUrl } from '@/utils/util'
 import CreditBeginnerCard from '../creditCardCategory/CreditBeginnerCard'
+import LoaderComponent from '../../Partners/LoaderComponent/LoaderComponent';
 
 const PersonalLoan = ({
   personalProducts,
@@ -24,6 +25,8 @@ const PersonalLoan = ({
 
   return (
     <>
+                <Suspense fallback={<LoaderComponent/>}>
+
       <div className='py-2'>
         <CreditListingBanner businessmetaheadtag={businessmetaheadtag} src={imageUrl} linesToShow={2} />
       </div>
@@ -51,6 +54,7 @@ const PersonalLoan = ({
         )}
         <ServiceTabs serviceTabs={serviceTabs} position={'5'} hidePadding={true} />
       </div>
+      </Suspense>
     </>
   )
 }

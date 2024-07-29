@@ -1,6 +1,8 @@
 import AadharCardDetailsClient from "@/app/client/component/Pages/AadharCardClient/AadharCardDetailsClient";
+import LoaderComponent from "@/app/client/component/Partners/LoaderComponent/LoaderComponent";
 import { BASE_URL, BLOG } from "@/utils/alljsonfile/service";
 import Axios from "axios";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const newsDetailsReq = {
@@ -57,10 +59,13 @@ export default async function Page({ params }) {
   const { newsListData, newsDetailsData } = await getPageData(params.slug);
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
     <AadharCardDetailsClient
       newsDetailsData={newsDetailsData}
       blogUrl={params.slug}
       newsListData={newsListData}
     />
+    </Suspense>
   );
 }

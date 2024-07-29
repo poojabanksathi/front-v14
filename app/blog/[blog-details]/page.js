@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BLOG, BUSINESSCATEGORY, FAQAPI } from '@/utils/alljsonfile/service'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const BlogDetails = dynamic(() => import('@/app/client/component/Layout/BlogDetails'), {
@@ -143,6 +144,8 @@ const blogData = await fetchData(params)
 
   return (
     <>
+          <Suspense fallback={<LoaderComponent />}>
+
       <section>
         <div className='bg-[#F4F8FB] pl-4'>
           <KnowledgebaseBreadcrumb />
@@ -151,6 +154,7 @@ const blogData = await fetchData(params)
           <BlogDetails blogPostDetailData={blogData?.blogPostDetailData?.data} />
         </div>
       </section>
+      </Suspense>
     </>
   )
 }

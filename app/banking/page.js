@@ -6,6 +6,8 @@ import {
 } from "@/utils/alljsonfile/service";
 import Axios from "axios";
 import BankingClient from "../client/component/Pages/BankingClient/BankingClient";
+import { Suspense } from "react";
+import LoaderComponent from "../client/component/Partners/LoaderComponent/LoaderComponent";
 
 export async function generateMetadata() {
   const metaDetailsParams = {
@@ -62,5 +64,9 @@ async function getPageData() {
 export default async function Page() {
   const pageData = await getPageData();
 
-  return <BankingClient {...pageData} />;
+  return (     
+     <Suspense fallback={<LoaderComponent />}>
+<BankingClient {...pageData} />
+</Suspense>
+);
 }

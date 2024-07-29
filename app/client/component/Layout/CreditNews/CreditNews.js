@@ -33,7 +33,6 @@ const CreditNews = ({
   bankingPage,
   creditScorePage,
 }) => {
-  console.log(CreditNewsList, "CreditNewsList");
   return (
     <div className="container pb-20 px-16  2xl:px-4 max-[1440px]:px-[10px] max-[1200px]:px-0 max-[1024px]:px-8 max-[479px]:px-0  mx-auto max-[991px]:max-w-full  ">
       {CreditNewsList && (

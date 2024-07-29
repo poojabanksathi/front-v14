@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import LeftTabs from "./LeftTabs/LeftTabs";
 import CardContent from "./CardContent/CardContent";
 import PersonalLoanExpertReview from "./PersonalLoanExpertReview/PersonalLoanExpertReview";
@@ -18,6 +18,7 @@ import { capitalizeFirstLetter, scrollIntoSection } from "@/utils/util";
 import LoanFeatures from "./LoanFeatures/LoanFeatures";
 import RequiredDocuments from "./RequiredDocuments/RequiredDocuments";
 import LoanEligibility from "./LoanEligibility/LoanEligibility";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const PersonalLoanDetails = ({
   productDetailsData,
@@ -120,6 +121,8 @@ const PersonalLoanDetails = ({
   const itrAmount = productDetailsData?.product_details?.itr;
 
   return (
+    <Suspense fallback={<LoaderComponent/>}>
+
     <div className="pt-4 container h-full mx-auto px-12 max-[1440px]:px-12 max-[1200px]:px-0 max-[1024px]:px-8 max-[479px]:px-4 max-[375px]:px-4 max-[320px]:px-4 max-[991px]:max-w-full">
       <div className="grid 2xl:gap-8 grid-cols-5  gap-4  max-[768px]:grid-cols-1 pb-4">
         {/* ------------LEFT TABS--------- */}
@@ -249,6 +252,7 @@ const PersonalLoanDetails = ({
         <ServiceTabs serviceTabs={serviceTabs} />
       </div>
     </div>
+    </Suspense>
   );
 };
 

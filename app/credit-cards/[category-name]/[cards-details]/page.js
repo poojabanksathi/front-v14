@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, FAQAPI, PRODUCTSAPI, multipleSlug } from '@/utils/alljsonfile/service'
 import { getDeviceIdCookie } from '@/utils/util'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const CardsDetailsClient = dynamic(
@@ -157,6 +158,8 @@ export default async function Page({params }) {
 
   return (
     <>
+          <Suspense fallback={<LoaderComponent />}>
+
       <CardsDetailsClient
         faqdata={faqdata}
         businessCategorydata={businessCategorydata}
@@ -170,6 +173,7 @@ export default async function Page({params }) {
         productDetailsUrl={params?.['cards-details']}
       
       />
+      </Suspense>
     </>
   )
 }

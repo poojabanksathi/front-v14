@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, BLOG } from '@/utils/alljsonfile/service'
 import Axios from 'axios'
 import { headers } from 'next/headers'
+import LoaderComponent from '../client/component/Partners/LoaderComponent/LoaderComponent'
 
 
 const CreditNews = dynamic(() => import('@/app/client/component/Layout/CreditNews/CreditNews'), {
@@ -89,7 +90,8 @@ export default async function Page({params}) {
 
   return (
     <>
- 
+               {/* <Suspense fallback={<LoaderComponent />}> */}
+
       {CreditNewsList && (
         <div className='bg-[#F4F8FB] h-auto'>
           <CommonBreadCrumbComponent
@@ -104,7 +106,7 @@ export default async function Page({params}) {
           />
         </div>
       )}
-   
+   {/* </Suspense> */}
     </>
   )
 }

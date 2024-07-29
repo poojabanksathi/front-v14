@@ -5,7 +5,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react'
 import ReactStars from 'react-stars'
 import ApplyNowButton from '@/app/client/component/common/ApplyNowButton/ApplyNowButton'
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import logo from '../../../../../../../public/assets/footer-Logo.svg'
 import accordionArrowall from '../../../../../../../public/assets/accordion-down.svg'
@@ -22,7 +22,6 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
 
   const router = useRouter()
   const pathNameurl = usePathname()
-  const searchParamsurl = useSearchParams();
   const size = useWindowSize()
   const cardDataRef = useRef(null)
 
@@ -220,7 +219,7 @@ const CardsListing = ({ cardsList, checkBoxValues, setCheckBoxValues, setCardsLi
   }
 
   // -------------------------  GA EVENTS LOGGING ----------------------------------- //
-  const position = searchParamsurl?.page ? (searchParamsurl?.page - 1) * 10 : 0
+  const position = router?.query?.page ? (router?.query?.page - 1) * 10 : 0
 
   const listingItems =
     cardsList?.length > 0 &&

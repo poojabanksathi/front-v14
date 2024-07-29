@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { BASE_URL, BUSINESSCATEGORY, BLOG } from '@/utils/alljsonfile/service'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const GoldRateDetailClient = dynamic(() => import('@/app/client/component/Pages/GoldRateClient/GoldRateDetailClient'), {
   ssr: false
@@ -75,6 +76,7 @@ export default async function Page({ params }) {
 
   return (
     <>
+              <Suspense fallback={<LoaderComponent />}>
 
     <GoldRateDetailClient 
       businessCategorydata={businessCategorydata} 
@@ -83,6 +85,7 @@ export default async function Page({ params }) {
       newsDetailsData={newsDetailsData} 
       blogUrl={params?.['gold-rate-details']}
         />
+        </Suspense>
     </>
   )
 }

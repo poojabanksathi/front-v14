@@ -1,6 +1,6 @@
 'use client';
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import EmiSliderChart from "../LoanCalculatorEmiDetails/EmiSliderChart";
 import ParagraphBanner from "@/app/client/component/Layout/CategoryParagraphBanner";
 import dynamic from "next/dynamic";
@@ -9,6 +9,7 @@ import {
   eligibilityData,
   scoreData,
 } from "@/utils/alljsonfile/checkCibilCardList";
+import LoaderComponent from "../../../Partners/LoaderComponent/LoaderComponent";
 
 const CreditNewsOffer = dynamic(
   () => import("../../../Layout/CreditNews/CreditScoreCard/CreditNewsOffer"),
@@ -58,6 +59,8 @@ function PersonalLoanCalculator({
           </div>
         </div>
         <div className="grid grid-cols-12 mt-[35px] ">
+        <Suspense fallback={<LoaderComponent/>}>
+
           <div className="col-span-8 max-lg:col-span-12 h-full">
             <div className="max-sm:px-4 max-[320px]:px-0">
               {metaData && (
@@ -87,6 +90,7 @@ function PersonalLoanCalculator({
               />
             </div>
           </div>
+          </Suspense>
         </div>
       </div>
     </div>

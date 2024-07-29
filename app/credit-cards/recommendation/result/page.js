@@ -1,7 +1,8 @@
 import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const RecommendationResultClient = dynamic(() => import('@/app/client/component/Pages/CreditCardsClient/RecommendationResultClient'), {
   ssr: false
@@ -81,10 +82,13 @@ export default async function Page({params}) {
   const { businessCategoryData,  leftMenuFilterData} = data;
 
   return (
+    <Suspense fallback={<LoaderComponent />}>
+
    <RecommendationResultClient
    businessCategoryData={businessCategoryData}
    leftMenuFilterData={leftMenuFilterData}
    />
+   </Suspense>
   )
 }
 

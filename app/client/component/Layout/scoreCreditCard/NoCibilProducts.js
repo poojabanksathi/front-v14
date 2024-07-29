@@ -7,7 +7,7 @@ import { ListingfilterData } from '@/utils/alljsonfile/listingfilterdata'
 import { noCibilScore } from '@/utils/alljsonfile/noCibilScore'
 
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import useGaEvents from '@/hooks/useGaEvents'
 import { sendEventToGTM } from '@/utils/util'
 import ApplyNowButton from '../../common/ApplyNowButton/ApplyNowButton'
@@ -21,12 +21,13 @@ const NoCibilProducts = ({ noCibilProductsData }) => {
   const starCount = 5
   const size = useWindowSize()
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const { page } = useParams();
+
   const isMobile = size?.width <= 576
 
   //GTM Events Data
 
-  const position = searchParams?.page ? (searchParams?.page - 1) * 10 : 0
+  const position = page ? (page - 1) * 10 : 0
   const listingItems = filteredData?.map((product, index) => {
     const pagePosition = position == 0 ? position + index + 1 : position + index + 1
     return {

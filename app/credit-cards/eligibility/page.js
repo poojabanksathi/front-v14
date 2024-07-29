@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ScrollToTop from 'react-scroll-to-top'
 import { BASE_URL, BUSINESSCATEGORY, COMMON, FAQAPI } from '@/utils/alljsonfile/service'
 import FAQ from '@/app/client/component/common/FAQ/FAQ'
 import CommonRoundedBreadcrumb from '@/app/client/component/common/CommonRoundedBreadcrumb/CommonRoundedBreadcrumb'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const DynamicHeader = dynamic(() => import('@/app/client/component/common/Header'), {
   ssr: false
@@ -119,6 +120,8 @@ export default async function Page({params}) {
 
   return (
     <>
+          <Suspense fallback={<LoaderComponent/>}>
+
       <div className='h-full bg-[#F4F8FB]  login-mobile-res'>
         {/* <div className=' bg-[#844FCF]'>
           <DynamicHeader businessCategorydata={businessCategorydata} />
@@ -144,6 +147,7 @@ export default async function Page({params}) {
           <DynamicMobileFooter businessCategorydata={businessCategorydata} />
         </div> */}
       </div>
+      </Suspense>
       {/* <ScrollToTop smooth color='#000' /> */}
     </>
   )

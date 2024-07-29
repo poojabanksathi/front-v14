@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BASE_URL, BUSINESSCATEGORY } from '@/utils/alljsonfile/service'
 
 import { metaInfo } from '@/utils/metaInfo'
 import Head from 'next/head'
 import { headers } from 'next/headers'
+import LoaderComponent from '@/app/client/component/Partners/LoaderComponent/LoaderComponent'
 
 const NoReportFound = dynamic(() => import('@/app/client/component/Layout/scoreCreditCard/NoReportFound'), {
   ssr: false
@@ -121,10 +122,12 @@ export default async function Page() {
         <link rel='apple-touch-icon' href='/favicon.ico' prefetch={false}></link>
       </head>
 
-  
+      <Suspense fallback={<LoaderComponent />}>
+
       <div className='bg-white'>
         <NoReportFound />
       </div>
+      </Suspense>
     </>
   )
 }

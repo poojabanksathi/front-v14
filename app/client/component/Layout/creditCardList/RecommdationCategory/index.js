@@ -1,8 +1,9 @@
 'use client';
-import React, { useRef } from 'react'
+import React, { Suspense, useRef } from 'react'
 import ListingFilter from '../../../common/CommonList/ListingFilter'
 import dynamic from 'next/dynamic'
 import { useIsInViewport } from '@/hooks/useIsInViewport'
+import LoaderComponent from '../../../Partners/LoaderComponent/LoaderComponent';
 
 const FAQ = dynamic(() => import('@/app/client/component/common/FAQ/FAQ'), {
   ssr: false
@@ -50,7 +51,8 @@ function RecommdationCategory({
           />
         </div>
       )}
-     
+               <Suspense fallback={<LoaderComponent/>}>
+
       <div ref={bottomCompRef}>
         <VedioCheck productDetailsData={businessmetaheadtag?.h1_paragraph} />
        
@@ -63,6 +65,7 @@ function RecommdationCategory({
         )}
         <FAQ faqdata={faqdata} />
       </div>
+      </Suspense>
     </div>
   )
 }
